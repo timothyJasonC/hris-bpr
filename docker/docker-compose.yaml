@@ -1,0 +1,68 @@
+name: hris_bpr
+
+services:
+  mariadb:
+    image: mariadb:10.8
+    container_name: db_hrms_frappe
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+      - --skip-character-set-client-handshake
+      - --skip-innodb-read-only-compressed
+    environment:
+      MYSQL_ROOT_PASSWORD: admin123
+    volumes:
+      - mariadb-data:/var/lib/mysql
+
+  redis:
+    image: redis:alpine
+
+  frappe:
+    image: frappe/bench:latest
+    user: root
+    container_name: hrms_bpr
+    command: >
+      bash -lc "
+        mkdir -p /home/frappe/bench-data &&
+        chown -R frappe:frappe /home/frappe/bench-data /workspace &&
+        exec su frappe -s /bin/bash -c 'HOME=/home/frappe /bin/bash /workspace/init.sh'
+      "
+    working_dir: /home/frappe
+    depends_on:
+      - mariadb
+      - redis
+    volumes:
+      - .:/workspace
+      - frappe-data:/home/frappe/bench-data
+      - ../wa_hr_api:/workspace/custom_apps/wa_hr_api
+    ports:
+      - "8004:8000"
+      - "9003:9000"
+
+  frappe-maintenance:
+    image: frappe/bench:latest
+    user: frappe
+    profiles: ["maintenance"]
+    command: >
+      bash -lc "
+        export HOME=/home/frappe &&
+        export PYENV_ROOT=/home/frappe/.pyenv &&
+        export PATH=/home/frappe/.local/bin:$$PYENV_ROOT/shims:$$PYENV_ROOT/bin:/usr/local/bin:/usr/bin:/bin:$$PATH &&
+        cd /home/frappe/bench-data/frappe-bench &&
+        /home/frappe/.local/bin/bench migrate &&
+        /home/frappe/.local/bin/bench build &&
+        /home/frappe/.local/bin/bench clear-cache &&
+        /home/frappe/.local/bin/bench restart
+      "
+    working_dir: /home/frappe
+    depends_on:
+      - frappe
+    volumes:
+      - .:/workspace
+      - frappe-data:/home/frappe/bench-data
+    environment:
+      PYTHONUNBUFFERED: 1
+
+volumes:
+  mariadb-data:
+  frappe-data:

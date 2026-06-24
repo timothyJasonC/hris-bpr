@@ -1,0 +1,60 @@
+{
+ "actions": [],
+ "creation": "2026-06-24 00:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "enabled",
+  "api_secret_key",
+  "employee_phone_field"
+ ],
+ "fields": [
+  {
+   "default": "0",
+   "description": "Matikan untuk menolak semua request dari WhatsApp gateway",
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "label": "Enabled"
+  },
+  {
+   "description": "Secret key yang harus dikirim WhatsApp gateway via header 'Authorization: Bearer <key>' atau 'X-Api-Key: <key>'",
+   "fieldname": "api_secret_key",
+   "fieldtype": "Password",
+   "label": "API Secret Key",
+   "reqd": 1
+  },
+  {
+   "default": "cell_number",
+   "description": "Field pada Employee yang digunakan untuk mencocokkan nomor HP pengirim WhatsApp",
+   "fieldname": "employee_phone_field",
+   "fieldtype": "Select",
+   "label": "Employee Phone Field",
+   "options": "cell_number\npersonal_email",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 0,
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-06-24 00:00:01.000000",
+ "modified_by": "Administrator",
+ "module": "WA HR API",
+ "name": "WA HR API Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}
