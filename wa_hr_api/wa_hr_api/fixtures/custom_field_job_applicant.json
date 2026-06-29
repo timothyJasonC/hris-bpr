@@ -1,0 +1,173 @@
+[
+ {
+  "doctype": "Custom Field",
+  "dt": "Job Applicant",
+  "name": "Job Applicant-ocr_section",
+  "fieldname": "ocr_section",
+  "fieldtype": "Section Break",
+  "label": "CV OCR Data",
+  "insert_after": "resume_attachment",
+  "collapsible": 1
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Job Applicant",
+  "name": "Job Applicant-is_ocr_processed",
+  "fieldname": "is_ocr_processed",
+  "fieldtype": "Check",
+  "label": "CV Processed by OCR",
+  "default": "0",
+  "read_only": 1,
+  "insert_after": "ocr_section"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Job Applicant",
+  "name": "Job Applicant-ocr_status",
+  "fieldname": "ocr_status",
+  "fieldtype": "Data",
+  "label": "OCR Status",
+  "read_only": 1,
+  "insert_after": "is_ocr_processed"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Job Applicant",
+  "name": "Job Applicant-column_break_ocr_1",
+  "fieldname": "column_break_ocr_1",
+  "fieldtype": "Column Break",
+  "insert_after": "ocr_status"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Job Applicant",
+  "name": "Job Applicant-cv_id",
+  "fieldname": "cv_id",
+  "fieldtype": "Data",
+  "label": "CV ID",
+  "read_only": 1,
+  "insert_after": "column_break_ocr_1"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Job Applicant",
+  "name": "Job Applicant-ocr_filename",
+  "fieldname": "ocr_filename",
+  "fieldtype": "Data",
+  "label": "OCR Filename",
+  "read_only": 1,
+  "insert_after": "cv_id"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Job Applicant",
+  "name": "Job Applicant-ocr_timestamp",
+  "fieldname": "ocr_timestamp",
+  "fieldtype": "Datetime",
+  "label": "OCR Processing Time",
+  "read_only": 1,
+  "insert_after": "ocr_filename"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Job Applicant",
+  "name": "Job Applicant-extracted_section",
+  "fieldname": "extracted_section",
+  "fieldtype": "Section Break",
+  "label": "Extracted CV Data",
+  "depends_on": "eval:doc.is_ocr_processed",
+  "collapsible": 1,
+  "insert_after": "ocr_timestamp"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Job Applicant",
+  "name": "Job Applicant-extracted_name",
+  "fieldname": "extracted_name",
+  "fieldtype": "Data",
+  "label": "Extracted Name",
+  "read_only": 1,
+  "insert_after": "extracted_section"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Job Applicant",
+  "name": "Job Applicant-extracted_email",
+  "fieldname": "extracted_email",
+  "fieldtype": "Data",
+  "label": "Extracted Email",
+  "read_only": 1,
+  "insert_after": "extracted_name"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Job Applicant",
+  "name": "Job Applicant-extracted_phone",
+  "fieldname": "extracted_phone",
+  "fieldtype": "Data",
+  "label": "Extracted Phone",
+  "read_only": 1,
+  "insert_after": "extracted_email"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Job Applicant",
+  "name": "Job Applicant-column_break_ocr_2",
+  "fieldname": "column_break_ocr_2",
+  "fieldtype": "Column Break",
+  "insert_after": "extracted_phone"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Job Applicant",
+  "name": "Job Applicant-years_experience",
+  "fieldname": "years_experience",
+  "fieldtype": "Int",
+  "label": "Years of Experience",
+  "read_only": 1,
+  "insert_after": "column_break_ocr_2"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Job Applicant",
+  "name": "Job Applicant-extracted_job_titles",
+  "fieldname": "extracted_job_titles",
+  "fieldtype": "Small Text",
+  "label": "Extracted Job Titles",
+  "description": "Previous job titles",
+  "read_only": 1,
+  "insert_after": "years_experience"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Job Applicant",
+  "name": "Job Applicant-extracted_skills",
+  "fieldname": "extracted_skills",
+  "fieldtype": "Small Text",
+  "label": "Extracted Skills",
+  "description": "Skills extracted from CV",
+  "read_only": 1,
+  "insert_after": "extracted_job_titles"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Job Applicant",
+  "name": "Job Applicant-extracted_education",
+  "fieldname": "extracted_education",
+  "fieldtype": "Small Text",
+  "label": "Extracted Education",
+  "description": "Education history",
+  "read_only": 1,
+  "insert_after": "extracted_skills"
+ },
+ {
+  "doctype": "Custom Field",
+  "dt": "Job Applicant",
+  "name": "Job Applicant-raw_preview",
+  "fieldname": "raw_preview",
+  "fieldtype": "Text",
+  "label": "CV Raw Preview",
+  "read_only": 1,
+  "insert_after": "extracted_education"
+ }
+]

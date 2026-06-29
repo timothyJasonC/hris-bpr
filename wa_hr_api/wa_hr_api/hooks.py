@@ -1,5 +1,5 @@
 app_name = "wa_hr_api"
-app_title = "WA HR BPR"
+app_title = "WA HR API"
 app_publisher = "PT Aluesa Global Digitek"
 app_description = "API tambahan absensi dan cuti untuk integrasi WhatsApp"
 app_email = "info@aluesagd.com"
@@ -122,6 +122,17 @@ app_license = "mit"
 
 # notification_config = "wa_hr_api.notifications.get_notification_config"
 
+fixtures = [
+	{
+		"doctype": "Custom Field",
+		"filters": [["name", "like", "Job Applicant-%"]],
+	},
+	{
+		"doctype": "Client Script",
+		"filters": [["name", "=", "WA HR API - Job Applicant OCR"]],
+	},
+]
+
 # Permissions
 # -----------
 # Permissions evaluated in scripted ways
@@ -138,13 +149,11 @@ app_license = "mit"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+	"Job Applicant": {
+		"after_insert": "wa_hr_api.recruitment.auto_process_cv_with_ocr",
+	}
+}
 
 # Scheduled Tasks
 # ---------------

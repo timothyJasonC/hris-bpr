@@ -1,0 +1,10 @@
+[
+ {
+  "doctype": "Client Script",
+  "name": "WA HR API - Job Applicant OCR",
+  "dt": "Job Applicant",
+  "view": "Form",
+  "enabled": 1,
+  "script": "frappe.ui.form.on('Job Applicant', {\n\trefresh(frm) {\n\t\tif (frm.is_new() || !frm.doc.resume_attachment) {\n\t\t\treturn;\n\t\t}\n\n\t\tconst label = frm.doc.is_ocr_processed ? __('Re-process CV with OCR') : __('Process CV with OCR');\n\n\t\tfrm.add_custom_button(label, () => {\n\t\t\tfrappe.call({\n\t\t\t\tmethod: 'wa_hr_api.recruitment.process_cv_with_ocr',\n\t\t\t\targs: { applicant: frm.doc.name },\n\t\t\t\tfreeze: true,\n\t\t\t\tfreeze_message: __('Processing CV with OCR...'),\n\t\t\t\tcallback: () => {\n\t\t\t\t\tfrm.reload_doc();\n\t\t\t\t},\n\t\t\t});\n\t\t}, __('Actions'));\n\n\t\tif (frm.doc.is_ocr_processed) {\n\t\t\tfrm.add_custom_button(__('View OCR Data'), () => {\n\t\t\t\tfrappe.set_route('Form', 'Job Applicant', frm.doc.name);\n\t\t\t\tfrm.scroll_to_field('ocr_section');\n\t\t\t}, __('Actions'));\n\t\t}\n\t},\n});\n"
+ }
+]
