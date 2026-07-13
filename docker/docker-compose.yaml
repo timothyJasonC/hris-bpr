@@ -24,7 +24,7 @@ services:
     command: >
       bash -lc "
         mkdir -p /home/frappe/bench-data &&
-        chown -R frappe:frappe /home/frappe/bench-data /workspace &&
+        chown -R frappe:frappe /home/frappe/bench-data &&
         exec su frappe -s /bin/bash -c 'HOME=/home/frappe /bin/bash /workspace/init.sh'
       "
     working_dir: /home/frappe

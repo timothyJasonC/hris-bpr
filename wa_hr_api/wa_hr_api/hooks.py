@@ -131,6 +131,10 @@ fixtures = [
 		"doctype": "Client Script",
 		"filters": [["name", "=", "WA HR API - Job Applicant OCR"]],
 	},
+	{
+		"doctype": "Client Script",
+		"filters": [["name", "=", "WA HR API - Leave Application Status"]],
+	},
 ]
 
 # Permissions

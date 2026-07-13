@@ -1,0 +1,10 @@
+[
+ {
+  "doctype": "Client Script",
+  "name": "WA HR API - Leave Application Status",
+  "dt": "Leave Application",
+  "view": "Form",
+  "enabled": 1,
+  "script": "frappe.ui.form.on('Leave Application', {\n\trefresh(frm) {\n\t\tconst isApprover = frm.doc.leave_approver === frappe.session.user;\n\t\tconst isSystemManager = frappe.user.has_role('System Manager');\n\t\tconst canEdit = isApprover || isSystemManager;\n\n\t\tfrm.set_df_property('status', 'read_only', canEdit ? 0 : 1);\n\t},\n});\n"
+ }
+]
